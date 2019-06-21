@@ -406,7 +406,7 @@
                   prefixedUrl = url
                 }
                 else {
-                  prefixedUrl = 'http://' + url
+                  prefixedUrl = 'https://' + url
                 }
               }
               else {
