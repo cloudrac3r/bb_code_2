@@ -474,7 +474,7 @@
           const attributeList = new Map([
             ["color", v => "color: "+v],
             ["face", v => "font-family: "+v],
-            ["size", v => "font-size: "+v]
+            ["size", v => "font-size: "+v+"px"]
           ])
           let style = ""
           for (let key of attributeList.keys()) {
