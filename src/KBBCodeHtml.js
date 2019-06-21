@@ -46,7 +46,8 @@
           a: 0,
           img: 0,
           sub: 0,
-          sup: 0
+          sup: 0,
+          span: 0
         },
         liGoDeeper: 0,
         skipLineBreak: 0,
@@ -161,6 +162,9 @@
 
           break
         }
+        case "span":
+          state.out += "</span>"
+          break
         }
       }
     }
@@ -214,6 +218,7 @@
       case 'h6':
       case 'a':
       case 'img':
+      case "span":
       {
         // if there is command of that type on the stack, then pop it
         if (this.htmlData['depth'][command] > 0) {
@@ -460,6 +465,28 @@
             }
           }
 
+          break
+        }
+
+        case "font":
+        {
+          this._parseBBCommandArgs(state, command, prefix, args)
+          const attributeList = new Map([
+            ["color", v => "color: "+v],
+            ["face", v => "font-family: "+v],
+            ["size", v => "font-size: "+v]
+          ])
+          let style = ""
+          for (let key of attributeList.keys()) {
+            let value = this._argsGetValue(args, key)
+            if (value) {
+              if (style) style += "; "
+              style += attributeList.get(key)(value)
+            }
+          }
+          state.out += `<span class="bbcolor" style="${style}">`
+          this._htmlStack_push(state, {type:'openClose', htmlId: 'span'})
+          this.htmlData.depth.span++
           break
         }
 
