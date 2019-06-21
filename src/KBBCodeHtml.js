@@ -77,7 +77,11 @@
 
         switch (htmlId) {
         case 'b':
+          state.out += "<strong>"
+          break
         case 'i':
+          state.out += "<em>"
+          break
         case 'u':
         case 'p':
         case 'sub':
@@ -105,7 +109,11 @@
 
         switch (htmlId) {
         case 'b':
+          state.out += "</strong>"
+          break
         case 'i':
+          state.out += "</em>"
+          break
         case 'u':
         case 'p':
         case 'sub':
