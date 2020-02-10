@@ -622,7 +622,7 @@
             }
           }
           else {
-            if (!this.setup.restoreBrForMultipleNewlines) {
+            if (this.setup.restoreBrForMultipleNewlines) {
               this.htmlData.skipLineBreak = 0
             }
           }
