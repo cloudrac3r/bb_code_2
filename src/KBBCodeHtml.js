@@ -622,7 +622,9 @@
             }
           }
           else {
-            this.htmlData.skipLineBreak = 0
+            if (!this.setup.restoreBrForMultipleNewlines) {
+              this.htmlData.skipLineBreak = 0
+            }
           }
 
           state.srcIdx++
@@ -707,6 +709,7 @@
     innerUrl: '',
     imgUrl: '',
     lbToBrEnabled: true,
+    restoreBrForMultipleNewlines: true,
     blockOnClickOnInternalLinks: false,
     passLinkDataOnInternalLinks: false
   }
