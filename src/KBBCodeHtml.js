@@ -47,7 +47,8 @@
           img: 0,
           sub: 0,
           sup: 0,
-          span: 0
+          span: 0,
+          details: 0
         },
         liGoDeeper: 0,
         skipLineBreak: 0,
@@ -98,6 +99,9 @@
 
           break
         }
+        case 'details':
+          state.out += ' &mdash; <details class="bb-details"><summary>read more</summary><div class="details-inner">'
+          break
         }
       }
     }
@@ -162,6 +166,9 @@
 
           break
         }
+        case 'details':
+          state.out += "</div></details>"
+          break
         case "span":
           state.out += "</span>"
           break
@@ -219,6 +226,7 @@
       case 'a':
       case 'img':
       case "span":
+      case "details":
       {
         // if there is command of that type on the stack, then pop it
         if (this.htmlData['depth'][command] > 0) {
@@ -258,6 +266,7 @@
       case 'li':
       case 'p':
       case 'ul':
+      case 'details':
       {
         this.htmlData.skipLineBreak = 1
 
@@ -313,6 +322,8 @@
       if (prefix == '') {
       // opener - no prefix
         switch (command) {
+        case 'details':
+          this.htmlData.skipLineBreak = 1
         case 'b':
         case 'i':
         case 'u':
@@ -521,6 +532,7 @@
         case 'h4':
         case 'h5':
         case 'h6':
+        case 'details':
         {
           this._parseBBCommandArgs(state, command, prefix, args)
           this._htmlStack_executeClose(state, command)
