@@ -266,7 +266,6 @@
       case 'li':
       case 'p':
       case 'ul':
-      case 'details':
       {
         this.htmlData.skipLineBreak = 1
 
